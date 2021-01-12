@@ -1,0 +1,68 @@
+[tool.poetry]
+name = "darqube-crm"
+version = "0.0.0"
+description = "Backend logic implementation based on FastAPI for Darqube costumer relationship management service"
+authors = ["Serghei Ungurean <s.ungurean28@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+uvicorn = "^0.11.8"
+fastapi = "^0.61.1"
+pydantic = { version = "^1.6", extras = ["email"] }
+passlib = { version = "^1.7", extras = ["bcrypt"] }
+pyjwt = "^1.7"
+asyncpg = "^0.21.0"
+aiosql = "^3.1.2"
+pypika = "^0.43.0"
+alembic = "^1.4"
+databases = { version = "^0.3.2", extras = ["postgresql"] }
+python-slugify = "^4.0"
+Unidecode = "^1.1"
+loguru = "^0.5.1"
+odmantic = "^0.3.2"
+aiohttp = "^3.7.3"
+
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
+isort = "^5.0"
+autoflake = "^1.4"
+wemake-python-styleguide = { git = "https://github.com/wemake-services/wemake-python-styleguide", rev = "a787ee1" }
+mypy = "^0.790"
+flake8-fixme = "^1.1"
+pytest = "^6.1"
+pytest-cov = "^2.10"
+pytest-asyncio = "^0.14.0"
+pytest-env = "^0.6.2"
+docker = "^4.3"
+httpx = "^0.16.1"
+asgi-lifespan = "^1.0.1"
+
+[tool.isort]
+profile = "black"
+src_paths = ["app", "tests"]
+combine_as_imports = true
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+filterwarnings = "error"
+addopts = '''
+  --strict
+  --tb=short
+  --cov=app
+  --cov=tests
+  --cov-branch
+  --cov-report=term-missing
+  --cov-report=html
+  --cov-report=xml
+  --no-cov-on-fail
+  --cov-fail-under=100
+'''
+env = ["SECRET_KEY=secret"]
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
+
+[tool.black]
+line-length = 120
