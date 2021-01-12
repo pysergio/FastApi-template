@@ -4,7 +4,7 @@ Quickstart
 
 Then run the following commands to bootstrap your environment with ``poetry``: ::
 
-    git clone https://bitbucket.org/darqube/terminal-api
+    git clone https://github.com/amm0day/FastApi-template
     cd terminal-api
     poetry install
     poetry shell
