@@ -1,35 +1,21 @@
 import logging
 import sys
-from typing import List
 
-from databases import DatabaseURL
 from loguru import logger
 from starlette.config import Config
-from starlette.datastructures import CommaSeparatedStrings, Secret
 
 from app.core.logging import InterceptHandler
 
-API_PREFIX = ""
-
-JWT_TOKEN_PREFIX = "Token"  # noqa: S105
-
 config = Config(".env")
 
-VERSION = config("VERSION", cast=str, default="-.-.-")
-
+VERSION = config("VERSION", cast=str, default="0.0.1")
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
+API_PREFIX: str = "/weather"
+PROJECT_NAME: str = config("PROJECT_NAME", default="Weather api")
 
-MONGO_DATABASE_URL: DatabaseURL = config("MONGO_DB_CONNECTION", cast=DatabaseURL)
-PG_DATABASE_URL: DatabaseURL = config("PG_DB_CONNECTION", cast=DatabaseURL)
+CONNECTION_REDIS: str = config("CONNECTION_REDIS", default="redis://redis:6379/?db=0")
 
-MAX_CONNECTIONS_COUNT: int = config("PG_MAX_CONNECTIONS_COUNT", cast=int, default=10)
-MIN_CONNECTIONS_COUNT: int = config("PG_MIN_CONNECTIONS_COUNT", cast=int, default=10)
-
-SECRET_KEY: Secret = config("SECRET_KEY", cast=Secret)
-PROJECT_NAME: str = config("PROJECT_NAME", default="Darqube CRM")
-
-ALLOWED_HOSTS: List[str] = config("ALLOWED_HOSTS", cast=CommaSeparatedStrings, default="")
-
+API_KEY_POSITIONSTACK: str = config("API_KEY_POSITIONSTACK", default="e7ceb1186afb8e5070a5e33a34812f16")
 # logging configuration
 
 LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
